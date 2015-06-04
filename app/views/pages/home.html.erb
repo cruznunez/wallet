@@ -1,9 +1,9 @@
 <h1>Pages#home</h1>
 <p>Soon will display </p>
 <ul>
-  <li>the total amount of money in his/her account (this should be a method which is tested!)</li>
-  <li>a link to the list of transactions</li>
-  <li>a link to create a new transaction</li>
+  <li><strike>the total amount of money in his/her account (this should be a method which is tested!)</strike></li>
+  <li><strike>a link to the list of transactions</strike></li>
+  <li><strike>a link to create a new transaction</strike></li>
   <li>The total amount spent in the current calendar month</li>
   <li>The total amount spent in the prior calendar month</li>
   <li>The total number of transactions in the current calendar month</li>
@@ -14,19 +14,8 @@
 </ul
 
 <p>
-  Deposits array: <%= Deposit.array %>
-</p>
-<p>
-  Deposits: <%= Deposit.total %>
-</p>
-<p>
-  <!-- <%= deposits = @deposits.map{|x| x.amount.to_f} %> -->
+  Total: <%= Deposit.total - Withdrawal.total %>
 </p>
 
-<p>
-  <!-- <%= withdrawals = @withdrawals.map{|x| x.amount.to_f} %> -->
-</p>
-
-<p>
-  <!-- Total: <%= deposits.reduce(:+) - withdrawals.reduce(:+) %> -->
-</p>
+<%= link_to "Transactions", pages_transactions_path %>
+<%= link_to "New Transaction", pages_new_transaction_path %>
