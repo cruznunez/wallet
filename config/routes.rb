@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  root 'pages#home'
+  get 'pages/home'
 
+  get 'pages/transactions'
+
+  get 'pages/new_transaction'
+
+  root 'pages#home'
+  get 'transactions' => 'pages#transactions'
   resources :withdrawals
   resources :deposits
   # The priority is based upon order of creation: first created -> highest priority.

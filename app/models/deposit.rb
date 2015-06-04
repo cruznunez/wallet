@@ -11,7 +11,7 @@ class Deposit < ActiveRecord::Base
     self.all.reduce(0){|sum, x| sum + x.amount.to_f}
   end
 
-  def round
+  private def round
     self.amount = self.amount.round(2)
   end
 
