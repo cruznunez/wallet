@@ -10,6 +10,13 @@ class DepositTest < ActiveSupport::TestCase
     assert depo2.save
   end
 
+  test "round" do
+    depo1 = Deposit.create(amount: 5.0044252346451)
+    depo2 = Deposit.create(amount: 5.0954252346451)
+    assert_equal 5.0, depo1.amount
+    assert_equal 5.1, depo2.amount
+  end
+
   test "array" do
     assert_equal [9.99, 9.99], Deposit.array
 
@@ -19,11 +26,11 @@ class DepositTest < ActiveSupport::TestCase
     assert_equal 9.99*2, Deposit.total
   end
 
-  test "round" do
-    depo1 = Deposit.create(amount: 5.0044252346451)
-    depo2 = Deposit.create(amount: 5.0954252346451)
-    assert_equal 5.0, depo1.amount
-    assert_equal 5.1, depo2.amount
+  test "this month?" do
+    assert_equal true, deposits(:one).this_month?
   end
 
+  test "this year?" do
+    assert_equal true, deposits(:one).created_at
+  end
 end

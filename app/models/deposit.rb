@@ -16,7 +16,7 @@ class Deposit < ActiveRecord::Base
   end
 
   def this_month?
-    self.this_year? && (self.created_at.strftime("%m").to_i == Time.now.strftime("%m").to_i)
+    (self.this_year?) && (self.created_at.strftime("%m").to_i == Time.now.strftime("%m").to_i)
   end
 
   def this_year?
