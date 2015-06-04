@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  get 'pages/home'
-
-  get 'pages/transactions'
-
-  get 'pages/new_transaction'
-
   root 'pages#home'
+  get 'h8' => 'pages#h8'
+  get 'pages/home'
+  get 'pages/transactions'
+  get 'pages/new_transaction'
   get 'transactions' => 'pages#transactions'
   resources :withdrawals
   resources :deposits

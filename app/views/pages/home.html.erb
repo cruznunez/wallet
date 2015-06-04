@@ -4,11 +4,11 @@
   <li><strike>the total amount of money in his/her account (this should be a method which is tested!)</strike></li>
   <li><strike>a link to the list of transactions</strike></li>
   <li><strike>a link to create a new transaction</strike></li>
-  <li>The total amount spent in the current calendar month</li>
-  <li>The total amount spent in the prior calendar month</li>
-  <li>The total number of transactions in the current calendar month</li>
-  <li>The total number of transactions in the prior calendar month</li>
-  <li>The biggest expense in the current calendar month</li>
+  <li><strike>The total amount spent in the current calendar month</strike></li>
+  <li><strike>The total amount spent in the prior calendar month</strike></li>
+  <li><strike>The total number of transactions in the current calendar month</strike></li>
+  <li><strike>The total number of transactions in the prior calendar month</strike></li>
+  <li><strike>The biggest expense in the current calendar month</strike></li>
   <li>The biggest expense ever</li>
   <li>The name of the place/person where you have spent the most money (over all time)</li>
 </ul
@@ -19,3 +19,45 @@
 
 <%= link_to "Transactions", pages_transactions_path %>
 <%= link_to "New Transaction", pages_new_transaction_path %>
+
+<h3>Withdrawals in current calendar month</h3>
+<% @withdrawals.each do |withdrawal| %>
+  <% if withdrawal.this_year? && withdrawal.this_month? %>
+    <p><%= withdrawal.amount %></p>
+  <% end %>
+<% end %>
+
+<h3>Withdrawals in previous month</h3>
+<% @withdrawals.each do |withdrawal| %>
+  <% if withdrawal.this_year? && withdrawal.last_month? %>
+    <p><%= withdrawal.amount %></p>
+  <% end %>
+<% end %>
+
+<!-- <h3>Withdrawals last month</h3>
+<% @withdrawals.each do |withdrawal| %>
+  <% if withdrawal.less_than_a_month_ago? %>
+    <p><%= withdrawal.amount %></p>
+  <% end %>
+<% end %> -->
+
+<h3>Transactions this month</h3>
+<% depo_count = @deposits.reduce(0) { |sum, deposit| deposit.this_month? ? sum+1 : sum+0 } %>
+<% with_count = @withdrawals.reduce(0) { |sum, withdrawal| withdrawal.this_month? ? sum+1 : sum+0 } %>
+<%= depo_count + with_count %>
+
+<h3>Transactions last month</h3>
+<% depo_count = @deposits.reduce(0) { |sum, deposit| deposit.last_month? ? sum+1 : sum+0 } %>
+<% with_count = @withdrawals.reduce(0) { |sum, withdrawal| withdrawal.last_month? ? sum+1 : sum+0 } %>
+<%= depo_count + with_count %>
+
+<h3>Biggest transaction this month</h3>
+<%= Withdrawal.biggest_this_month %>
+
+<h3>Biggest transaction ever</h3>
+<%= Withdrawal.biggest %>
+
+<br/>
+<br/>
+
+<%= link_to "H8 if you dare", h8_path %>

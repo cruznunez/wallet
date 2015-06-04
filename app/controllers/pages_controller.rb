@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
   def home
+    @deposits = Deposit.all
+    @withdrawals = Withdrawal.all
   end
 
   def transactions
@@ -8,5 +10,8 @@ class PagesController < ApplicationController
   end
 
   def new_transaction
+  end
+
+  def h8
   end
 end
